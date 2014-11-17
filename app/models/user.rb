@@ -20,4 +20,8 @@ class User < ActiveRecord::Base
     end
   end
 
+  def email
+    "hey"
+  end
+
 end

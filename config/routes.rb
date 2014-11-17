@@ -1,4 +1,33 @@
 Rails.application.routes.draw do
+  get 'dashboard' => 'app#dashboard'
+  
+  #get 'app/dashboard'
+
+  get 'app/restaurant_info'
+
+  get 'app/place_order'
+
+  get 'app/confirm_order'
+
+  get 'app/see_order'
+
+  get 'app/see_foodlane'
+
+  get 'app/user_profile'
+
+  get 'public/rootpage'
+
+  get 'public/about'
+
+  get 'public/contact'
+
+  get 'public/help'
+
+  get 'public/careers'
+
+  get 'public/joinus'
+
+  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   resources :users
   root to: 'visitors#index'
   get '/auth/:provider/callback' => 'sessions#create'
