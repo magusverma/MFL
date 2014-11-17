@@ -1,4 +1,12 @@
 Rails.application.routes.draw do
+  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
+  resources :users
+  root to: 'visitors#index'
+  get '/auth/:provider/callback' => 'sessions#create'
+  get '/signin' => 'sessions#new', :as => :signin
+  get '/signout' => 'sessions#destroy', :as => :signout
+  get '/auth/failure' => 'sessions#failure'
+
   get 'dashboard' => 'app#dashboard'
   
   #get 'app/dashboard'
@@ -27,13 +35,6 @@ Rails.application.routes.draw do
 
   get 'public/joinus'
 
-  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
-  resources :users
-  root to: 'visitors#index'
-  get '/auth/:provider/callback' => 'sessions#create'
-  get '/signin' => 'sessions#new', :as => :signin
-  get '/signout' => 'sessions#destroy', :as => :signout
-  get '/auth/failure' => 'sessions#failure'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
