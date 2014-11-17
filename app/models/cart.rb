@@ -8,22 +8,24 @@ class Cart < ActiveRecord::Base
 	has_many :clubchats
 	has_many :cartitems
 	validates :restaurant_id, :uniqueness => {:scope => [:club_id,:user_id]}
-	#validates :email, uniqueness: true
+	# validates :email, uniqueness: true
 
 	def lock_it
 		if self.locked
-			return false
-		else
-			copy_data
-			calculate_bill
+			return true
 		end
+		# copy_data #happends in calculate_bill
+		calculate_bill
 		b = self.get_bill
 
 		if ((b[:total_bill] >= self.restaurant.min_bill) and (not b[:address].eql? ",\n,\n, PINCODE:  \n Contact Number: +91-"))
 			self.update(:lock => "locked",:status => "accepted",:message => "Registered as Normal Order , order reference Number: NOR#{self.id}")
+			return true
 		elsif (self.club.bill_amount > min_bill)
 			self.update(:lock => "locked",:status => "accepted",:message => "Registered as a Club Order , order reference Number: CLB#{self.club_id}")
+			return true
 		else
+			self.update(:lock => "locked",:status => "accepted",:message => "Bill Amount not above Minimum Requirement")
 			return false
 		end
 	end
@@ -71,15 +73,18 @@ class Cart < ActiveRecord::Base
 		# restaurant name: , name: , address: , items:{name,price,quantity} , tax: , bill amount:
 
 		bo[:name] = self.user_name.to_s
-		bo[:pic] = self.user.try(:picture)
+		bo[:email] = self.user.email
+		# bo[:pic] = self.user.image
 		bo[:restaurant] = self.restaurant_name.to_s
 		bo[:address] = self.building_no.to_s + ",\n" + self.area.to_s + ",\n" + self.city.to_s + ", PINCODE: " + self.pincode.to_s + " \n Contact Number: +91-" + self.contact.to_s
 		bo[:items] = Hash.new
 		self.cartitems.each do |ci|
 			# quantity: 3.0, price: 300, item_name: "Mexican Pizza"
 			bo[:items][ci.item_name] = Hash.new
+			bo[:items][ci.item_name][:id] = ci.item.id
 			bo[:items][ci.item_name][:price] = ci.price
 			bo[:items][ci.item_name][:quantity] = ci.quantity.to_i
+			bo[:items][ci.item_name][:contribution] = ci.quantity.to_i*ci.price
 		end
 		
 		bo[:tax] = Hash.new
@@ -165,7 +170,7 @@ class Cart < ActiveRecord::Base
 				self.update(:club => c,:club_status => :confirm)
 				return true
 			else
-				return "already clubbing"
+				return true #"already clubbing"
 			end
 		end
 	end

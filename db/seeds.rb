@@ -112,6 +112,6 @@ if Clubchat.first.nil?
 	cc.save
 end
 
-User.create(name: "Magus Verma",about: "Student at IIITD", email: "magus@gmail.com")
+# User.create(name: "Magus Verma",about: "Student at IIITD", email: "magus@gmail.com")
 
 puts "Database now has "+User.all.count.to_s+ " users, "+Item.all.count.to_s + " items, "+Category.all.count.to_s + " categories, "+Restaurant.all.count.to_s + " Restaurant, "+Cart.all.count.to_s + " Cart, "+Cartitem.all.count.to_s + " Cartitems, "+Club.all.count.to_s + " Clubs, "+Clubchat.all.count.to_s + " Clubchats, "
