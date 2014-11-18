@@ -4,6 +4,12 @@ class Club < ActiveRecord::Base
 	has_many :clubchats
 	belongs_to :user
 	# has_one :master_cart
+	after_create :post_news
+
+	def post_news
+		Newsfeed.create({story: self.user.name.to_s+" has started a foodlane in "+self.carts.first.restaurant.name+", <a href='/order/"+self.carts.first.restaurant.get_url_name+"/"+self.id.to_s+"'>Join </a> " ,user: self.user})
+	end
+
 
 	# sum of all verified carts bill
 	def bill_amount

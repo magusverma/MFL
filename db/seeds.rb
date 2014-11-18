@@ -13,7 +13,8 @@ Applingo.create(
 		{line: 'Login with Facebook' 								,context: 'homepage-login-button' 		,page: '/'},
 		{line: 'Foodlane is where you can collaborate easily with people around you for ordering food online with less bill' 	,context: 'homepage-description' ,page: '/'},	
 		{line: 'know more'			 								,context: 'homepage-descriptioncontinue',page: '/'},				
-		{line: 'My pending foodlanes'								,context: 'navbar-collaborate-status'	,page: '/dashboard'}				
+		{line: 'My pending foodlanes'								,context: 'navbar-collaborate-status'	,page: '/dashboard'},				
+		{line: 'What\'s Up'											,context: 'dashboard-right-sidebar-head',page: '/dashboard'}				
 	]
 )
 
@@ -51,8 +52,8 @@ Categories = [
 ]
 
 Restaurants = [
-	["Chicago Pizza","Nehru Place","Chicago Pizza - India's fastest growing fast food service restaurant for casual and fine dining",400,""],
-	["Sagar Ratna","Okhla","a time immemorial South Indian Restaurant Chain; in fact it is open in most areas of Delhi-NCR and is quite recognised by most people.",500,""]
+	["Chicago Pizza","Nehru Place","Chicago Pizza - India's fastest growing fast food service restaurant for casual and fine dining",400,"/assets/img/chicago.jpeg"],
+	["Sagar Ratna","Okhla","a time immemorial South Indian Restaurant Chain; in fact it is open in most areas of Delhi-NCR and is quite recognised by most people.",500,"http://www.theoceanpearl.in/images/SagarRatna_logo.jpg"]
 ]
 
 Carts = [
@@ -96,7 +97,7 @@ end
 #Club Request Accepted
 #drop clubid,name,description
 if Club.first.nil? 
-	c = Club.create()
+	c = Club.new
 	c1 = Cart.first
 	c2 = Cart.first(2).last
 

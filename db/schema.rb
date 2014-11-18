@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141117172458) do
+ActiveRecord::Schema.define(version: 20141118134331) do
 
   create_table "announcements", force: true do |t|
     t.boolean  "active"
@@ -132,6 +132,15 @@ ActiveRecord::Schema.define(version: 20141117172458) do
   add_index "items", ["category_id"], name: "index_items_on_category_id"
   add_index "items", ["restaurant_id"], name: "index_items_on_restaurant_id"
 
+  create_table "newsfeeds", force: true do |t|
+    t.text     "story"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "newsfeeds", ["user_id"], name: "index_newsfeeds_on_user_id"
+
   create_table "restaurants", force: true do |t|
     t.string   "name"
     t.string   "location"
@@ -142,6 +151,7 @@ ActiveRecord::Schema.define(version: 20141117172458) do
     t.string   "photo_url"
     t.float    "rating"
     t.integer  "rating_count"
+    t.integer  "loved_by",     default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end

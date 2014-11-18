@@ -5,6 +5,7 @@ class AppController < ApplicationController
     @cui = current_user_image
     @cun = current_user_name
   end
+
   def restaurants
   end
   

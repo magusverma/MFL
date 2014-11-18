@@ -10,6 +10,7 @@ class CreateRestaurants < ActiveRecord::Migration
       t.string :photo_url
       t.float :rating
       t.integer :rating_count
+      t.integer :loved_by,default: 0
 
       t.timestamps
     end
