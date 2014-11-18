@@ -1,2 +1,71 @@
-<h1>App#dashboard</h1>
-<p>Find me in app/views/app/dashboard.html.erb</p>
+
+          <section class="wrapper">
+
+<div class="row">
+    <div class="col-lg-9 main-chart">
+
+
+
+        <div class="row mt">
+          <% Restaurant.all.each do |restaurant| %>
+            <div class="col-md-4 col-sm-4 mb">
+                <div class="white-panel pn">
+                    <div class="white-header">
+                        <h5><%= restaurant.name %></h5>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6 col-xs-6 goleft">
+                            <p><i class="fa fa-heart"></i> <%= restaurant.loved_by %></p>
+                        </div>
+                        <div class="col-sm-6 col-xs-6"></div>
+                    </div>
+                    <a href="/order/<%= restaurant.url %>">
+                    <div class="centered">
+                        <img src="<%= restaurant.photo_url %>" width="120">
+                    </div>
+                    </a>
+                </div>
+            </div>
+            <!-- /col-md-4 -->
+          <% end %>
+
+        </div>
+        <!-- /row -->
+
+					
+                  </div><!-- /col-lg-9 END SECTION MIDDLE -->
+                  
+                  
+      <!-- **********************************************************************************************************************************************************
+      RIGHT SIDEBAR CONTENT
+      *********************************************************************************************************************************************************** -->                  
+                  
+                  <div class="col-lg-3 ds">
+                    <!--COMPLETED ACTIONS DONUTS CHART-->
+						<h3><%= Applingo.get('dashboard-right-sidebar-head') %></h3>
+                       <% Newsfeed.all.each do |nf| %>                 
+                      <% if (nf.story == "foodlane" and not Cart.find(nf.club.master_cart_id).expired?) %>
+                        <div class="desc">
+                        	<div class="thumb">
+                        		<span class="badge bg-theme"><i class="fa fa-clock-o"></i></span>
+                        	</div>
+                        	<div class="details"> 
+                        		<p><muted><%= time_ago_in_words(nf.created_at) %>  ago
+                            <%# timeago_tag Time.now + 24*60*60, :nojs => true %></muted><br/>
+                               <a href="#"><%= nf.user.first_name %></a> started a foodlane in <%= nf.restaurant.name %> , 
+                               <a href="order/<%=nf.restaurant.get_url_name %>?join=<%= nf.club.id%>">
+                               <!-- <button type="button" class="btn btn-primary btn-xs">  -->
+                               join
+                               <!-- </button> -->
+                               </a>
+
+                               <br/>
+                        		</p>
+                        	</div>
+                        </div>
+                      <% end %>
+                      <% end %>
+                  </div><!-- /col-lg-3 -->
+              </div><!--/row -->
+          </section>
+      

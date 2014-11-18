@@ -149,6 +149,7 @@ ActiveRecord::Schema.define(version: 20141118134331) do
 
   create_table "restaurants", force: true do |t|
     t.string   "name"
+    t.string   "url"
     t.string   "location"
     t.text     "about"
     t.integer  "min_bill"

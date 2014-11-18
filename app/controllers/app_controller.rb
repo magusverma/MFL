@@ -1,9 +1,13 @@
 class AppController < ApplicationController
   layout "app"
+  before_action :user_vars
 
-  def dashboard
+  def user_vars
     @cui = current_user_image
     @cun = current_user_name
+  end
+
+  def dashboard
   end
 
   def restaurants

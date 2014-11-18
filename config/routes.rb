@@ -3,18 +3,19 @@ Rails.application.routes.draw do
   resources :users
   root to: 'visitors#index'
   get '/auth/:provider/callback' => 'sessions#create'
-  get '/signin' => 'sessions#new', :as => :signin
-  get '/signout' => 'sessions#destroy', :as => :signout
-  get '/auth/failure' => 'sessions#failure'
+  get '/signin'             => 'sessions#new', :as => :signin
+  get '/signout'            => 'sessions#destroy', :as => :signout
+  get '/auth/failure'       => 'sessions#failure'
 
-  get 'dashboard' => 'app#dashboard', :as => :dashboard
-  get 'restaurants' => 'app#restaurants', :as => :restaurants
-  get 'foodlanes' => 'app#foodlanes', :as => :foodlanes
-  get 'trending' => 'app#trending', :as => :trending
-  get 'big_orders' => 'app#big_orders', :as => :big_orders
-  get 'preferences' => 'app#preferences', :as => :preferences
-  get 'foodlane_help' => 'app#foodlane_help', :as => :foodlane_help
+  get 'dashboard'           => 'app#dashboard', :as => :dashboard
+  get 'restaurants'         => 'app#restaurants', :as => :restaurants
+  get 'foodlanes'           => 'app#foodlanes', :as => :foodlanes
+  get 'trending'            => 'app#trending', :as => :trending
+  get 'big_orders'          => 'app#big_orders', :as => :big_orders
+  get 'preferences'         => 'app#preferences', :as => :preferences
+  get 'foodlane_help'       => 'app#foodlane_help', :as => :foodlane_help
   
+  get '/order/:rest_name'   => 'app#place_order', :as => :order_page
   # get 'restaurants'  
   # #get 'app/dashboard'
 
