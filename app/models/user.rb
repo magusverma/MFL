@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
 
 
   def get_active_carts
-    self.carts.where(:lock =>nil).where("expires > ?",Time.now)
+    self.carts.where(:lock =>nil).where("expires > ?",Time.now).where("club_id not ?",nil)
   end
 
   def get_active_carts_percent_status

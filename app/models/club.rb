@@ -7,7 +7,8 @@ class Club < ActiveRecord::Base
 	after_create :post_news
 
 	def post_news
-		Newsfeed.create({story: self.user.name.to_s+" has started a foodlane in "+self.carts.first.restaurant.name+", <a href='/order/"+self.carts.first.restaurant.get_url_name+"/"+self.id.to_s+"'>Join </a> " ,user: self.user})
+		Newsfeed.create({story:"foodlane",club: self,user: self.user,restaurant: self.carts.first.restaurant})
+		# Newsfeed.create({story: self.user.name.to_s+" has started a foodlane in "+self.carts.first.restaurant.name+", <a href='/order/"+self.carts.first.restaurant.get_url_name+"/"+self.id.to_s+"'>Join </a> " ,user: self.user})
 	end
 
 

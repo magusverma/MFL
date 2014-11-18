@@ -135,10 +135,16 @@ ActiveRecord::Schema.define(version: 20141118134331) do
   create_table "newsfeeds", force: true do |t|
     t.text     "story"
     t.integer  "user_id"
+    t.integer  "club_id"
+    t.integer  "restaurant_id"
+    t.integer  "cart_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
+  add_index "newsfeeds", ["cart_id"], name: "index_newsfeeds_on_cart_id"
+  add_index "newsfeeds", ["club_id"], name: "index_newsfeeds_on_club_id"
+  add_index "newsfeeds", ["restaurant_id"], name: "index_newsfeeds_on_restaurant_id"
   add_index "newsfeeds", ["user_id"], name: "index_newsfeeds_on_user_id"
 
   create_table "restaurants", force: true do |t|

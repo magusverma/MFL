@@ -78,7 +78,7 @@ end
 # Remove Restaurant Name
 # Remove Taxess
 Carts.each do |restaurant_id,club_id,user_id,bill_amount,vat,address|
-	Cart.create(restaurant_id: restaurant_id,club_id: club_id,user_id: user_id,bill_amount: bill_amount,vat: vat,address: address)
+	Cart.create(restaurant_id: restaurant_id,club_id: club_id,user_id: user_id,bill_amount: bill_amount,vat: vat,address: address,expires: Time.now+24*60*60)
 end
 
 # Drop price,item_name

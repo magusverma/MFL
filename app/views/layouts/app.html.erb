@@ -238,17 +238,26 @@
                     <!--COMPLETED ACTIONS DONUTS CHART-->
 						<h3><%= Applingo.get('dashboard-right-sidebar-head') %></h3>
                        <% Newsfeed.all.each do |nf| %>                 
-                      <!-- Fifth Action -->
-                      <div class="desc">
-                      	<div class="thumb">
-                      		<span class="badge bg-theme"><i class="fa fa-clock-o"></i></span>
-                      	</div>
-                      	<div class="details">
-                      		<p><muted><%= timeago_tag Time.zone.now, :nojs => true, :limit => 10.days.ago %></muted><br/>
-                      		   <a href="#">Daniel Pratt</a> purchased a wallet in your store.<br/>
-                      		</p>
-                      	</div>
-                      </div>
+                      <% if (nf.story == "foodlane" and not Cart.find(nf.club.master_cart_id).expired?) %>
+                        <div class="desc">
+                        	<div class="thumb">
+                        		<span class="badge bg-theme"><i class="fa fa-clock-o"></i></span>
+                        	</div>
+                        	<div class="details"> 
+                        		<p><muted><%= time_ago_in_words(nf.created_at) %>  ago
+                            <%# timeago_tag Time.now + 24*60*60, :nojs => true %></muted><br/>
+                               <a href="#"><%= nf.user.first_name %></a> started a foodlane in <%= nf.restaurant.name %> , 
+                               <a href="order/<%=nf.restaurant.get_url_name %>?join=<%= nf.club.id%>">
+                               <!-- <button type="button" class="btn btn-primary btn-xs">  -->
+                               join
+                               <!-- </button> -->
+                               </a>
+
+                               <br/>
+                        		</p>
+                        	</div>
+                        </div>
+                      <% end %>
                       <% end %>
                   </div><!-- /col-lg-3 -->
               </div><!--/row -->
