@@ -39,6 +39,11 @@ class Cart < ActiveRecord::Base
 		end
 	end
 
+	def get_percent
+		calculate_bill
+		return ((self.club.bill_amount/self.restaurant.min_bill)*100)
+	end
+
 	def locked?
 		self.lock.eql? "locked"
 	end

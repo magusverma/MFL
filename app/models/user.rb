@@ -8,6 +8,23 @@ class User < ActiveRecord::Base
     self.carts.where(:lock =>nil).where("expires > ?",Time.now)
   end
 
+  def get_active_carts_percent_status
+    carts = self.get_active_carts
+    ps = []
+    carts.each do |c|
+      h = Hash.new
+      h[:name] = c.restaurant.name
+      h[:percent] = c.get_percent
+      if h[:percent] > 100
+        h[:percent] = 100
+      end
+      h[:club] = c.club.id
+      h[:ends] = c.expires - Time.now
+      ps.push(h)
+    end
+    return ps
+  end
+
   def set_default_role
     if User.count == 0
       self.role ||= :admin

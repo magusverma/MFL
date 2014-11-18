@@ -7,33 +7,40 @@ Rails.application.routes.draw do
   get '/signout' => 'sessions#destroy', :as => :signout
   get '/auth/failure' => 'sessions#failure'
 
-  get 'dashboard' => 'app#dashboard'
+  get 'dashboard' => 'app#dashboard', :as => :dashboard
+  get 'restaurants' => 'app#restaurants', :as => :restaurants
+  get 'foodlanes' => 'app#foodlanes', :as => :foodlanes
+  get 'trending' => 'app#trending', :as => :trending
+  get 'big_orders' => 'app#big_orders', :as => :big_orders
+  get 'preferences' => 'app#preferences', :as => :preferences
+  get 'foodlane_help' => 'app#foodlane_help', :as => :foodlane_help
   
-  #get 'app/dashboard'
+  # get 'restaurants'  
+  # #get 'app/dashboard'
 
-  get 'app/restaurant_info'
+  # get 'app/restaurant_info' , :as => :restaurant_info
 
-  get 'app/place_order'
+  # get 'app/place_order'
 
-  get 'app/confirm_order'
+  # get 'app/confirm_order'
 
-  get 'app/see_order'
+  # get 'app/see_order'
 
-  get 'app/see_foodlane'
+  # get 'app/see_foodlane', :as => :foodlane
 
-  get 'app/user_profile'
+  # get 'app/user_profile'
 
-  get 'public/rootpage'
+  # get 'public/rootpage'
 
-  get 'public/about'
+  # get 'public/about', :as => :about
 
-  get 'public/contact'
+  # get 'public/contact'
 
-  get 'public/help'
+  # get 'public/help'
 
-  get 'public/careers'
+  # get 'public/careers'
 
-  get 'public/joinus'
+  # get 'public/joinus'
 
 
   # The priority is based upon order of creation: first created -> highest priority.

@@ -8,6 +8,7 @@ class Club < ActiveRecord::Base
 	# sum of all verified carts bill
 	def bill_amount
 		g = get_bills
+		print g
 		g[:total]
 	end
 
