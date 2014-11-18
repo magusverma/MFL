@@ -61,6 +61,7 @@ ActiveRecord::Schema.define(version: 20141117172458) do
     t.string   "user_name"
     t.integer  "club_id"
     t.string   "club_status"
+    t.datetime "expires"
     t.float    "bill_amount"
     t.float    "service_tax"
     t.float    "vat"
@@ -113,7 +114,6 @@ ActiveRecord::Schema.define(version: 20141117172458) do
     t.datetime "updated_at"
   end
 
-  add_index "clubs", ["master_cart_id"], name: "index_clubs_on_master_cart_id"
   add_index "clubs", ["user_id"], name: "index_clubs_on_user_id"
 
   create_table "items", force: true do |t|

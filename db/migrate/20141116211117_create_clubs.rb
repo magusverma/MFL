@@ -5,8 +5,8 @@ class CreateClubs < ActiveRecord::Migration
       t.references :user, index: true
       t.string :name
       t.text :description
-      t.references :master_cart, index: true
-
+      # t.references :master_cart, index: true
+      t.integer :master_cart_id, index: true
       t.timestamps
     end
   end

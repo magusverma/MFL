@@ -3,7 +3,7 @@ class Club < ActiveRecord::Base
 	has_many :carts
 	has_many :clubchats
 	belongs_to :user
-	belongs_to :master_cart
+	# has_one :master_cart
 
 	# sum of all verified carts bill
 	def bill_amount

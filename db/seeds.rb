@@ -12,9 +12,11 @@ Applingo.create(
 		{line: 'because we just love ordering food' 				,context: 'homepage-heading-tagline' 	,page: '/'},
 		{line: 'Login with Facebook' 								,context: 'homepage-login-button' 		,page: '/'},
 		{line: 'Foodlane is where you can collaborate easily with people around you for ordering food online with less bill' 	,context: 'homepage-description' ,page: '/'},	
-		{line: 'know more'			 								,context: 'homepage-descriptioncontinue',page: '/'}				
+		{line: 'know more'			 								,context: 'homepage-descriptioncontinue',page: '/'},				
+		{line: 'My pending foodlanes'								,context: 'navbar-collaborate-status'	,page: '/dashboard'}				
 	]
 )
+
 Appcolors.create(
 	[
 		{value: 0			,tag:"topbar" 				,context:"dashboard" 	,page:"/*"},
@@ -22,6 +24,15 @@ Appcolors.create(
 	]
 ) 
 
+j = JSON.parse('{"name":"Magus Verma","provider":"google_oauth2","uid":"107827319509519119529","role":"admin","image":"https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg?sz=50","phone":null,"address":null,"email":"Magus12141@iiitd.ac.n","first_name":"Magus","last_name":"Verma"}')
+User.create(j)
+u = User.where(:email => "Magus12141@iiitd.ac.ina").take
+
+if u.nil?
+	uid = 1
+else
+	uid = u.id
+end
 
 Items = [
 	["Mexican Pizza",300,1,1,""],

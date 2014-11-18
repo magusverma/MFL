@@ -1,6 +1,12 @@
 class User < ActiveRecord::Base
   enum role: [:user, :vip, :admin]
   after_initialize :set_default_role, :if => :new_record?
+  has_many :carts
+
+
+  def get_active_carts
+    self.carts.where(:lock =>nil).where("expires > ?",Time.now)
+  end
 
   def set_default_role
     if User.count == 0

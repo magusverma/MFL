@@ -7,6 +7,7 @@ class CreateCarts < ActiveRecord::Migration
       t.string :user_name
       t.references :club, index: true
       t.string :club_status
+      t.datetime :expires
       t.float :bill_amount
       t.float :service_tax
       t.float :vat
