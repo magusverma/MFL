@@ -7,6 +7,10 @@ class AppController < ApplicationController
     @cun = current_user_name
   end
 
+  def handle_order
+    redirect_to :back
+  end
+
   def dashboard
   end
 

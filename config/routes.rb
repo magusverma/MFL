@@ -15,7 +15,8 @@ Rails.application.routes.draw do
   get 'preferences'         => 'app#preferences', :as => :preferences
   get 'foodlane_help'       => 'app#foodlane_help', :as => :foodlane_help
   
-  get '/order/:rest_name'   => 'app#place_order', :as => :order_page
+  post '/order/:rest_name/handle_order'       => 'app#handle_order', :as => :order_handler
+  get '/order/:rest_name'                     => 'app#place_order', :as => :order_page
   # get 'restaurants'  
   # #get 'app/dashboard'
 

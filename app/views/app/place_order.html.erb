@@ -1,5 +1,39 @@
+          <style type="text/css">
+          	input[type=text] {
+			  float: left;
+			  width: 40px;
+			  font: bold 20px Helvetica, sans-serif;
+			  padding: 3px 0 0 0;
+			  text-align: center;
+			}
+			form div {
+			  overflow: hidden;
+			  margin: 0 0 5px 0;
+			}
+			.button {
+			  margin: 0 0 0 5px;
+			  text-indent: -9999px;
+			  cursor: pointer;
+			  width: 29px;
+			  height: 29px;
+			  float: left;
+			  text-align: center;
+			  background: url(/images/buttons.png) no-repeat;
+			}
+			.dec {
+			  background-position: 0 -29px;
+			}
+
+			.buttons {
+			  padding: 20px 0 0 140px;
+			}
+          </style>
           <section class="wrapper site-min-height">
           <div class="col-lg-9 col-md-9 col-sm-9">
+
+
+
+
           	<% (1..3).to_a.each do |j| %>
           	<h3><i class="fa fa-angle-right"></i> Discover Our Panels</h3>
 					<div class="row">
@@ -17,7 +51,7 @@
 							<div class="content-panel pn2">
 								<img src="/assets/img/pizza1.jpg" height="69%" width="100%" alt="" style="margin-top:0px;">
 								<div class="profile-01 centered">
-									<p>ADD TO CONTACT LIST</p>
+									<p>ADD TO CART</p>
 								</div>
 							</div>
 						</div>
@@ -33,13 +67,19 @@
 				
 				<div class="steps pn">
 					<p>Cart</p>
-					<% (1..5).to_a.each do |j| %>
-					
-				    <label >Aloo Parantha (5)  ₹500</label>
+		 <%= form_for "order" , :url => "/order/"+params[:rest_name]+"/handle_order" , html: { method: :post } do |f| %>
+      			<% (1..5).to_a.each do |j| %>
+		 			
+				    <label >
+				    	Aloo Parantha (₹500) &nbsp
+				    	<%= number_field_tag 'quantity', nil, in: 1...10 ,:style => "width:30px;height:45%"%>
+        			</label>
 	    		 	<% end %>
-	    		 	<input type='submit' value='Join Someone' id='submit'/>
+	    		 	<!-- <input type='submit' value='Join Someone' id='submit'/>
 	    		 	<input type='submit' value='Start a Foodlane' id='submit'/>
-				    <input type='submit' value='Order Now' id='submit'/>
+				    <input type='submit' value='Order Now' id='submit'/> -->
+				    <%= f.submit "Create Foodlane" %>
+		<% end %>
 				</div>
 			</div>
 		 </div>
