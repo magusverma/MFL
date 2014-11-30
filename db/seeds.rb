@@ -36,13 +36,13 @@ else
 end
 
 Items = [
-	["Mexican Pizza",300,1,1,""],
-	["Italian Pizza",400,1,1,""],
-	["Cheese Burst Pizza",500,1,1,""],
+	["Mexican Pizza",300,1,1,"/food_items/mexican_pizza.png"],
+	["Italian Pizza",400,1,1,"/food_items/italian_pizza.png"],
+	["Cheese Burst Pizza",500,1,1,"/food_items/cheese_burst.png"],
 
-	["Masala Dosa",100,2,2,""],
-	["Rava Dosa",120,2,2,""],
-	["Uttapam",100,3,2,""]
+	["Masala Dosa",100,2,2,"/food_items/masala_dosa.png"],
+	["Rava Dosa",120,2,2,"/food_items/rava_dosa.jpg"],
+	["Uttapam",100,3,2,"/food_items/uttapam.jpg"]
 ]
 
 Categories = [
@@ -101,8 +101,8 @@ if Club.first.nil?
 	c1 = Cart.first
 	c2 = Cart.first(2).last
 
-	c.user_id = 1 #c1.user
-	c.master_cart_id = c1.id
+	# c.user_id = 1 #c1.user
+	# c.master_cart_id = c1.id
 	c1.club = c
 	c1.club_status = :confirm
 	c1.save
@@ -111,6 +111,7 @@ if Club.first.nil?
 	c2.club_status = :pending
 	c2.save
 
+	c.restaurant = c1.restaurant
 	c.save
 end
 

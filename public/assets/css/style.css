@@ -1282,6 +1282,20 @@ PANELS CONFIGURATIONS
 	font-weight: 900;
 }
 
+/* Restaurant Panel*/
+.restaurant-panel {
+    /*background: url(../img/instagram.jpg) no-repeat center top;*/
+    text-align: center;
+    background-position: center center;
+}
+.restaurant-panel i {
+    /*color: white;*/
+    margin-top: 15px;
+}
+.restaurant-panel p {
+    margin: 5px;
+    /*color: white;*/
+}
 
 /* Instagram Panel*/
 .instagram-panel {

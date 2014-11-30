@@ -1,0 +1,25 @@
+ {"id"=>1, "name"=>"Chicago Pizza", "url"=>"chicago_pizza", "location"=>"Nehru Place", "about"=>"Chicago Pizza - India's fastest growing fast food service restaurant for casual and fine dining", "min_bill"=>400, "start_time"=>nil, "end_time"=>nil, "photo_url"=>"/assets/img/chicago.jpeg", "rating"=>nil, "rating_count"=>nil, "loved_by"=>0, "created_at"=>"2014-11-18T16:07:36.673Z", "updated_at"=>"2014-11-18T16:07:36.673Z", :items=>{"Pizza"=>{"Mexican Pizza"=>{"id"=>1, "name"=>"Mexican Pizza", "price"=>300, "category_id"=>1, "restaurant_id"=>1, "rating"=>nil, "photo_url"=>"", "time_start_avail"=>nil, "time_end_avail"=>nil, "created_at"=>"2014-11-18T16:07:35.178Z", "updated_at"=>"2014-11-18T16:07:35.178Z"}, "Italian Pizza"=>{"id"=>2, "name"=>"Italian Pizza", "price"=>400, "category_id"=>1, "restaurant_id"=>1, "rating"=>nil, "photo_url"=>"", "time_start_avail"=>nil, "time_end_avail"=>nil, "created_at"=>"2014-11-18T16:07:35.342Z", "updated_at"=>"2014-11-18T16:07:35.342Z"}, "Cheese Burst Pizza"=>{"id"=>3, "name"=>"Cheese Burst Pizza", "price"=>500, "category_id"=>1, "restaurant_id"=>1, "rating"=>nil, "photo_url"=>"", "time_start_avail"=>nil, "time_end_avail"=>nil, "created_at"=>"2014-11-18T16:07:35.521Z", "updated_at"=>"2014-11-18T16:07:35.521Z"}}}} 
+
+       			<% (1..5).to_a.each do |j| %>
+		 			
+				    <label >
+				    	Aloo Parantha (₹500) &nbsp
+				    	<%= number_field_tag 'quantity', nil, in: 1...10 ,:style => "width:30px;height:45%"%>
+        			</label>
+	    		 	<% end %>
+	    		 	<!-- <input type='submit' value='Join Someone' id='submit'/>
+	    		 	<input type='submit' value='Start a Foodlane' id='submit'/>
+				    <input type='submit' value='Order Now' id='submit'/> -->
+				    <%= f.submit "Create Foodlane" %>
+				<% end %>
+
+					<div class="col-lg-12 col-md-12 col-sm-12 mb">
+				
+				<div class="steps pn2">
+					<p>Cart</p>
+<%= form_for "order" , :url => "/order/"+params[:rest_name]+"/handle_order" , html: { method: :post } do |f| %>
+					<%= f.submit "Create Foodlane" ,:id=>"post-order"%>
+
+<% end %>
+				</div>
+			</div>

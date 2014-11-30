@@ -12,6 +12,11 @@ class Restaurant < ActiveRecord::Base
 		self.url
 	end
 	
+	def self.get_restaurant(url_name)
+		r = Restaurant.where(:url => url_name).take
+		return r
+	end
+
 	def get_rest
 		r = JSON.parse(self.to_json)
 		r[:items] = Hash.new

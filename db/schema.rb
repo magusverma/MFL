@@ -106,15 +106,12 @@ ActiveRecord::Schema.define(version: 20141118134331) do
 
   create_table "clubs", force: true do |t|
     t.integer  "clubid"
-    t.integer  "user_id"
-    t.string   "name"
     t.text     "description"
-    t.integer  "master_cart_id"
+    t.boolean  "completed"
+    t.integer  "restaurant_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  add_index "clubs", ["user_id"], name: "index_clubs_on_user_id"
 
   create_table "items", force: true do |t|
     t.string   "name"

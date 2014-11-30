@@ -1,8 +1,9 @@
 class Club < ActiveRecord::Base
   # belongs_to :user
 	has_many :carts
+	belongs_to :restaurant
 	has_many :clubchats
-	belongs_to :user
+	# belongs_to :user
 	# has_one :master_cart
 	after_create :post_news
 
@@ -10,7 +11,6 @@ class Club < ActiveRecord::Base
 		Newsfeed.create({story:"foodlane",club: self,user: self.user,restaurant: self.carts.first.restaurant})
 		# Newsfeed.create({story: self.user.name.to_s+" has started a foodlane in "+self.carts.first.restaurant.name+", <a href='/order/"+self.carts.first.restaurant.get_url_name+"/"+self.id.to_s+"'>Join </a> " ,user: self.user})
 	end
-
 
 	# sum of all verified carts bill
 	def bill_amount
@@ -78,8 +78,6 @@ class Club < ActiveRecord::Base
 		bills[:description] = self.description
 		bills
 	end
-
-
 
 	def lock_all
 		self.carts.each do |c|

@@ -2,11 +2,13 @@ class CreateClubs < ActiveRecord::Migration
   def change
     create_table :clubs do |t|
       t.integer :clubid
-      t.references :user, index: true
-      t.string :name
+      # t.references :user, index: true
+      # t.string :name
       t.text :description
+      t.boolean :completed
+      t.references :restaurant
       # t.references :master_cart, index: true
-      t.integer :master_cart_id, index: true
+      # t.integer :master_cart_id, index: true
       t.timestamps
     end
   end

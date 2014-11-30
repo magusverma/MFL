@@ -8,7 +8,32 @@ class AppController < ApplicationController
   end
 
   def handle_order
-    redirect_to :back
+    "order"=>{"8"=>"1", "9"=>"1", "7"=>"1"}, "commit"=>"Create Order", "rest_name"=>"chicago_pizza"
+    u = current_user
+    if u.nil? 
+      redirect_to :back , :notice => "Invalid User Session"
+    end
+
+    r = Restaurant.get_restaurant(params["rest_name"])
+    if r.nil? 
+      redirect_to :back , :notice => "Invalid Restaurant"
+    end
+    
+    c = Cart.new()
+    c.restaurant = r
+    c.user = u
+    if params["commit"].eql?"Create Order"
+
+    else
+      c.club 
+    end 
+  #       belongs_to :restaurant
+  # belongs_to :user
+  # belongs_to :club
+  # has_many :clubchats
+  # has_many :cartitems
+  # validates :restaurant_id, :uniqueness => {:scope => [:club_id,:user_id]}
+    
   end
 
   def dashboard
@@ -37,6 +62,7 @@ class AppController < ApplicationController
   end
 
   def place_order
+    @current_restaurant = Restaurant.get_restaurant(params["rest_name"]).get_rest
   end
 
   def confirm_order
