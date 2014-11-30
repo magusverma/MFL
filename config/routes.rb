@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   get 'foodlane_help'       => 'app#foodlane_help', :as => :foodlane_help
   
   post '/order/:rest_name/handle_order'       => 'app#handle_order', :as => :order_handler
+  patch '/order/:rest_name/confirm'       => 'app#confirm', :as => :order_confirmer
   get '/order/:rest_name'                     => 'app#place_order', :as => :order_page
   # get 'restaurants'  
   # #get 'app/dashboard'

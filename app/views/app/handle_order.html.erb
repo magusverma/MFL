@@ -1,14 +1,27 @@
  <section class="wrapper site-min-height" id="maincontent">
 <div class="col-lg-12">
-<div class="form-panel">
+<div class="form-panel" style="background:rgb(240, 240, 240)">
 	<h4 class="mb"><i class="fa fa-angle-right"></i> Order Summary</h4>
-	<%= @cart.get_bill.to_s %>
+	<div class="row">
+	<%# @bill.to_s %>
+	<% @bill[:items].each do |item,atts| %>
+		<div class="showback col-lg-3 col-md-3 col-sm-3" style="margin:20px">
+			<%= item %>, (Quantity: <%= atts[:quantity] %>) , (Price: ₹<%= atts[:price] %>), (Contribution:  ₹<%= atts[:contribution] %>)
+		</div>
+	<% end %>
+	</div>
+	<div class="row">
+	<div class="showback col-lg-5 col-md-5 col-sm-5" style="float:right;margin-right:30px;background:rgb(255, 197, 180)">
+			Tax: ₹<%= @bill[:tax][:service_tax] %><br>
+			 ₹Total Bill : ₹<%= @bill[:total_bill]%> 
+	</div>
+	</div>
 </div>
-<div class="form-panel">
+<div class="form-panel" style="background:rgb(240, 240, 240)">
 	  <h4 class="mb"><i class="fa fa-angle-right"></i> Payment Details</h4>
 
   <!-- <form class="form-horizontal style-form" method="get"> -->
-  <%= form_for(@cart,:url=>"/confirm",:html=>{:class=>"form-horizontal style-form"}) do |f| %>
+  <%= form_for(@cart,:url=>"/order/"+params[:rest_name]+"/confirm",:html=>{:class=>"form-horizontal style-form"}) do |f| %>
 	  <% if @cart.errors.any? %>
 	    <div id="error_explanation">
 	      <h2>something isn't right in <%= pluralize(@cart.errors.count, "error") %> </h2>

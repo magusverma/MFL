@@ -36,11 +36,26 @@ class AppController < ApplicationController
     else
       redirect_to :back,:notice => "Couldn't Update Cart"
     end     
-    c.club_status = "donedanadonedara"
     c.save
-    c.club.update_completed
+    c.club.update_completed if not c.club.nil?
     @cart = c
+    @bill = @cart.get_bill
     session[:cart_id] = c.id
+  end
+
+  def confirm
+    cart = Cart.find(session[:cart_id])
+    if cart.nil?
+      redirect_to :back,:notice => "Couldn't Find Active Cart"
+    else
+      cart.user_name = params[:cart][:user_name]
+      cart.contact = params[:cart][:contact]  
+      cart.address = params[:cart][:address]  
+      cart.expires = Time.now + params[:cart][:time].to_i*60
+    end
+    cart.club_status = "donedanadonedara"
+    cart.save
+    redirect_to :dashboard,:notice => "Succesfully Created Order"
   end
 
   def dashboard
