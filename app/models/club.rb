@@ -1,15 +1,22 @@
 class Club < ActiveRecord::Base
-  # belongs_to :user
 	has_many :carts
 	belongs_to :restaurant
 	has_many :clubchats
-	# belongs_to :user
-	# has_one :master_cart
-	after_create :post_news
 
-	def post_news
-		Newsfeed.create({story:"foodlane",club: self,user: self.user,restaurant: self.carts.first.restaurant})
-		# Newsfeed.create({story: self.user.name.to_s+" has started a foodlane in "+self.carts.first.restaurant.name+", <a href='/order/"+self.carts.first.restaurant.get_url_name+"/"+self.id.to_s+"'>Join </a> " ,user: self.user})
+	def self.get_active_club(restaurant)
+		c = Club.where(:restaurant => restaurant).last
+		
+		if c.nil? or c.completed 
+			c = Club.create(:completed => false,:restaurant => restaurant)
+		end
+
+		return c
+	end
+
+	def update_completed
+		if self.bill_amount >= self.restaurant.min_bill
+			self.update(:completed => true)
+		end
 	end
 
 	# sum of all verified carts bill
@@ -48,13 +55,13 @@ class Club < ActiveRecord::Base
 		bills = Hash.new
 		bills[:total] = 0
 		bills[:bills] = Array.new
-		self.carts.each_with_index do |c,i|
+		self.carts.where.not(:club_status => nil).each_with_index do |c,i|
 			b = c.get_bill
 			# bills[:bills][i] = c.get_bill
 			bills[:bills].push(b)
 			bills[:total] += b[:total_bill]
 		end
-		bills[:goal] = self.carts.first.restaurant.min_bill
+		bills[:goal] = self.restaurant.min_bill
 		bills[:away] = bills[:goal] - bills[:total]
 		bills[:away] = 0 if bills[:away] < 0
 		bills[:description] = self.description
@@ -66,13 +73,13 @@ class Club < ActiveRecord::Base
 		bills[:total] = 0
 		# bills[:bills] = Hash.new
 		bills[:bills] = Array.new
-		self.carts.each_with_index do |c,i|
+		self.carts.where.not(:club_status => nil).each_with_index do |c,i|
 			b = c.get_bill_summary
 			# bills[:bills][i] = c.get_bill_summary
 			bills[:bills].push(b)
 			bills[:total] += b[:total_bill]
 		end
-		bills[:goal] = self.carts.first.restaurant.min_bill
+		bills[:goal] = self.restaurant.min_bill
 		bills[:away] = bills[:goal] - bills[:total]
 		bills[:away] = 0 if bills[:away] < 0
 		bills[:description] = self.description
@@ -80,7 +87,7 @@ class Club < ActiveRecord::Base
 	end
 
 	def lock_all
-		self.carts.each do |c|
+		self.carts.where.not(:club_status => nil).each do |c|
 			c.lock_it
 		end
 	end

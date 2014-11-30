@@ -7,7 +7,7 @@ class Cart < ActiveRecord::Base
 	belongs_to :club
 	has_many :clubchats
 	has_many :cartitems
-	validates :restaurant_id, :uniqueness => {:scope => [:club_id,:user_id]}
+	# validates :restaurant_id, :uniqueness => {:scope => [:club_id,:user_id]}
 	# validates :email, uniqueness: true
 
 	# scope :unexpired , -> { where(rotting: true) }
@@ -53,7 +53,8 @@ class Cart < ActiveRecord::Base
 			self.cartitems.each do |ci|
 				ci.update(price: ci.item.price,item_name: ci.item.name.to_s)
 			end
-			self.update(user_name: self.user.try(:name),restaurant_name: self.restaurant.name.to_s)
+			# user_name: self.user.try(:name)
+			self.update(restaurant_name: self.restaurant.name.to_s)
 			return true
 		end
 		return false
@@ -92,7 +93,7 @@ class Cart < ActiveRecord::Base
 			# bo[:email] = self.user["email"]
 			# bo[:pic] = self.user.image
 			bo[:restaurant] = self.restaurant_name.to_s
-			bo[:address] = self.building_no.to_s + ",\n" + self.area.to_s + ",\n" + self.city.to_s + ", PINCODE: " + self.pincode.to_s + " \n Contact Number: +91-" + self.contact.to_s
+			bo[:address] = self.address #self.building_no.to_s + ",\n" + self.area.to_s + ",\n" + self.city.to_s + ", PINCODE: " + self.pincode.to_s + " \n Contact Number: +91-" + self.contact.to_s
 			bo[:items] = Hash.new
 			self.cartitems.each do |ci|
 				# quantity: 3.0, price: 300, item_name: "Mexican Pizza"
@@ -136,6 +137,21 @@ class Cart < ActiveRecord::Base
 			return true
 		end
 	end
+
+	def remove_all_items()
+		if self.locked?
+			return false
+		else
+			if self.id.nil? 
+				return false
+			end
+			Cartitem.where(:cart_id => self.id).each do |ci|			
+				ci.destroy
+			end
+			return true
+		end
+	end
+
 
 	def remove_item(id,quantity)
 		if self.locked?
@@ -187,7 +203,7 @@ class Cart < ActiveRecord::Base
 		else
 			if self.club_id.nil?
 				self.update(:club => c,:club_status => :confirm,:expires => endtime)
-				c = Club.create(user_id: self.user,master_cart_id: self.id)
+				c = Club.create(user_id: self.user)
 				return true
 			else
 				return true #"already clubbing"

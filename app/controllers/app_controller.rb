@@ -8,7 +8,7 @@ class AppController < ApplicationController
   end
 
   def handle_order
-    "order"=>{"8"=>"1", "9"=>"1", "7"=>"1"}, "commit"=>"Create Order", "rest_name"=>"chicago_pizza"
+    # "order"=>{"8"=>"1", "9"=>"1", "7"=>"1"}, "commit"=>"Create Order", "rest_name"=>"chicago_pizza"
     u = current_user
     if u.nil? 
       redirect_to :back , :notice => "Invalid User Session"
@@ -16,24 +16,31 @@ class AppController < ApplicationController
 
     r = Restaurant.get_restaurant(params["rest_name"])
     if r.nil? 
-      redirect_to :back , :notice => "Invalid Restaurant"
+      redirect_to :back , :Club.get_active_clubnotice => "Invalid Restaurant"
     end
     
-    c = Cart.new()
-    c.restaurant = r
-    c.user = u
-    if params["commit"].eql?"Create Order"
-
+    c = nil
+    if not params["commit"].eql?"Create Order"
+      clb = Club.get_active_club(r)
+      c = clb.carts.where(:user => u).take
+      if c.nil?
+        c = Cart.create(:restaurant => r,:user => u,:club => clb)
+      end
     else
-      c.club 
+      c = Cart.create(:restaurant => r,:user => u)
     end 
-  #       belongs_to :restaurant
-  # belongs_to :user
-  # belongs_to :club
-  # has_many :clubchats
-  # has_many :cartitems
-  # validates :restaurant_id, :uniqueness => {:scope => [:club_id,:user_id]}
-    
+    if c.remove_all_items()
+      params["order"].each do |item,quantity| 
+        c.add_item(item.to_i,quantity.to_i)
+      end
+    else
+      redirect_to :back,:notice => "Couldn't Update Cart"
+    end     
+    c.club_status = "donedanadonedara"
+    c.save
+    c.club.update_completed
+    @cart = c
+    session[:cart_id] = c.id
   end
 
   def dashboard
