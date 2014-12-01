@@ -14,6 +14,8 @@
 
 .zocial,
 a.zocial {
+	width: 100%;
+	margin-top: 40px;
 	border: 1px solid #777;
 	border-color: rgba(0,0,0,0.2);
 	border-bottom-color: #333;
