@@ -3,6 +3,7 @@ class AppController < ApplicationController
   before_action :user_vars
 
   def user_vars
+    redirect_to root_url unless user_signed_in?
     @cui = current_user_image
     @cun = current_user_name
   end

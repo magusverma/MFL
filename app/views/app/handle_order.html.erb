@@ -11,7 +11,7 @@
 	<% end %>
 	</div>
 	<div class="row">
-	<div class="showback col-lg-5 col-md-5 col-sm-5" style="float:right;margin-right:30px;background:rgb(255, 197, 180)">
+	<div class="showback col-lg-5 col-md-5 col-sm-5" style="float:right;margin-right:30px;background:rgb(220, 220, 220);text-align:right;">
 			Tax: ₹<%= @bill[:tax][:service_tax] %><br>
 			 ₹Total Bill : ₹<%= @bill[:total_bill]%> 
 	</div>
@@ -59,10 +59,12 @@
                 <div class="col-sm-3">
       	          <%= current_user.email %>
                 </div>
+                <% if not @cart.club.nil? %>
                 <label class="col-sm-2 col-sm-2 control-label">Waiting Limit for foodlane to complete</label>
                 <div class="col-sm-3">
-              <%= number_field_tag "cart[time]",30 %> minutes
+              		<%= number_field_tag "cart[time]",30 %> minutes
                 </div>
+                <% end %>
             </div>
 
       <%= f.submit 'Finish',:style=>"margin-left:90%",:class => "btn btn-primary" %>

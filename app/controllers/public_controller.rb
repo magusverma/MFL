@@ -1,4 +1,5 @@
 class PublicController < ApplicationController
+  layout "public"
   def rootpage
   end
 

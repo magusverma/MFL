@@ -37,10 +37,11 @@ class ApplicationController < ActionController::Base
         nil
       end
     end
-  private
+
     def user_signed_in?
       return true if current_user
     end
+  private
 
     def correct_user?
       @user = User.find(params[:id])
