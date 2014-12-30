@@ -68,21 +68,18 @@
 				</div>
           	<% end %>
           	</div>
-		</div>	
 		 <div class="col-lg-3 col-md-3 col-sm-3">
-		 <div class="row">
-		 	
-		 <div class="col-lg-12 col-md-12 col-sm-12 mb">
-		 <%= form_for "order" , :url => "/order/"+params[:rest_name]+"/handle_order" , html: { method: :post ,id: :cart,"data-minbill" => @current_restaurant["min_bill"]} do |f| %>
+			 <div class="row">
+				 <div class="col-lg-12 col-md-12 col-sm-12 mb">
+				 <%= form_for "order" , :url => "/order/"+params[:rest_name]+"/handle_order" , html: { method: :post ,id: :cart,"data-minbill" => @current_restaurant["min_bill"]} do |f| %>
 
-		 		<h2>My Cart:</h2>
-		 		<div id="post-order"></div>
-		 		<h4 id="bill"></h4>
-		 		<%= f.submit "Create Foodlane" ,:class=>"btn btn-danger",:id =>"create-order"%>
-		 	<% end %>
-		 </div>
-
-		 </div>
+				 		<h2>My Cart:</h2>
+				 		<div id="post-order"></div>
+				 		<h4 id="bill"></h4>
+				 		<%= f.submit "Create Foodlane" ,:class=>"btn btn-danger",:id =>"create-order"%>
+				 	<% end %>
+				 </div>
+			 </div>
 		 </div>
 		</section>
 <script type="text/javascript">
@@ -126,9 +123,14 @@
 			$("#bill").show().html("Total Bill : ₹"+bill_val).show(600);
 			$("#create-order").show();
 			if(bill_val>=min_bill){
-				$("#create-order").attr("value","Create Order");
+				if ($("#create-order").attr("value") == "Create Foodlane"){
+					$("#create-order").attr("value","Create Order").fadeToggle(300).fadeToggle(300);
+				}
+				
 			}else{
-				$("#create-order").attr("value","Join Foodlane")
+				if ($("#create-order").attr("value") == "Create Order"){
+					$("#create-order").attr("value","Join Foodlane").fadeToggle(300).fadeToggle(300);
+				}
 			}
 		}
     }

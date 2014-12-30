@@ -37,7 +37,7 @@
       <div class="form-group">
           <label class="col-sm-2 col-sm-2 control-label">Name</label>
           <div class="col-sm-3">
-	          <%= f.text_field :user_name ,:class => "form-control"%>
+	          <%= f.text_field :user_name ,:class => "form-control",:value => current_user.name%>
               <!-- <input type="text" class="form-control" name="order[name]"> -->
           </div>
           <label class="col-sm-2 col-sm-2 control-label">Contact Number</label>
