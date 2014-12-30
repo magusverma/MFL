@@ -1,6 +1,5 @@
 
           <section class="wrapper">
-
 <div class="row">
     <div class="col-lg-12 main-chart">
 
@@ -8,21 +7,39 @@
 
         <div class="row mt">
           <% Restaurant.all.each do |restaurant| %>
-            <div class="col-md-4 col-sm-4 mb">
+            <div class="col-md-3 col-sm-3 mb">
                 <div class="white-panel pn">
+                    <a href="/order/<%= restaurant.url %>" data-transition="pop">
+                        <div class="centered">
+                            <img src="<%= restaurant.photo_url %>" width="100%" height="100px" style="margin-bottom:20px;">
+                        </div>
                     <div class="white-header">
                         <h5><%= restaurant.name %></h5>
                     </div>
                     <div class="row">
-                        <div class="col-sm-6 col-xs-6 goleft">
+                        <div class="col-sm-11 col-xs-11 goleft">
+                          <p class="ktt_tagOrange">
+                            Restaurant Type                
+                          </p> 
+                          <br><br>
+                        </div>
+                        <div class="col-sm-3 col-xs-3 goleft">
                             <p><i class="fa fa-heart"></i> <%= restaurant.loved_by %></p>
                         </div>
-                        <div class="col-sm-6 col-xs-6"></div>
+                        <div class="col-sm-9 col-xs-9">
+                          Some Tasty food on your way. Feeling Hungry already? yeah order now!
+                        </div>
                     </div>
-                    <a href="/order/<%= restaurant.url %>" data-transition="pop">
-                    <div class="centered">
-                        <img src="<%= restaurant.photo_url %>" width="120">
+                    
+                    <br>
+                    <% c = Club.get_active_club(restaurant) %>
+                    Current Foodlane Needs ₹<%= c.get_diff %> More
+                    <div class="progress progress-striped" style="width:80%;align-content: center;margin-left: 10%;height: 12px">
+                        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="<%= c.get_percent %>" aria-valuemin="0" aria-valuemax="100" style="width: <%= c.get_percent %>%">
+                            <span class="sr-only"><%= c.get_percent %>% Complete (success)</span>
+                        </div>
                     </div>
+
                     </a>
                 </div>
             </div>

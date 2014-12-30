@@ -9,13 +9,21 @@ Rails.application.routes.draw do
   get '/auth/failure'       => 'sessions#failure'
 
   get 'dashboard'           => 'app#dashboard', :as => :dashboard
-  get 'restaurants'         => 'app#restaurants', :as => :restaurants
-  get 'foodlanes'           => 'app#foodlanes', :as => :foodlanes
+  # get 'restaurants'         => 'app#restaurants', :as => :restaurants
+  # get 'foodlanes'           => 'app#foodlanes', :as => :foodlanes
   get 'trending'            => 'app#trending', :as => :trending
-  get 'big_orders'          => 'app#big_orders', :as => :big_orders
-  get 'preferences'         => 'app#preferences', :as => :preferences
-  get 'foodlane_help'       => 'app#foodlane_help', :as => :foodlane_help
+  # get 'big_orders'          => 'app#big_orders', :as => :big_orders
+  # get 'preferences'         => 'app#preferences', :as => :preferences
+  # get 'foodlane_help'       => 'app#foodlane_help', :as => :foodlane_help
   
+  get 'restaurants'         => 'app#comingsoon', :as => :restaurants
+  get 'foodlanes'           => 'app#comingsoon', :as => :foodlanes
+  # get 'trending'            => 'app#comingsoon', :as => :trending
+  get 'big_orders'          => 'app#comingsoon', :as => :big_orders
+  get 'preferences'         => 'app#comingsoon', :as => :preferences
+  get 'foodlane_help'       => 'app#comingsoon', :as => :foodlane_help
+  
+
   post '/order/:rest_name/handle_order'       => 'app#handle_order', :as => :order_handler
   patch '/order/:rest_name/confirm'       => 'app#confirm', :as => :order_confirmer
   get '/order/:rest_name'                     => 'app#place_order', :as => :order_page

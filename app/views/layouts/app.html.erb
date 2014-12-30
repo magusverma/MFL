@@ -43,7 +43,10 @@
                   <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
               </div>
             <!--logo start-->
-            <a href="/" class="logo"><b><%= Applingo.get('logo')%></b></a>
+            <a href="/" class="logo">
+              <b><%# Applingo.get('logo')%></b>
+              <img src="/icon.png">
+            </a>
             <!--logo end-->
             <% if logged_in_requirement %>
             <div class="nav notify-row" id="top_menu">
@@ -52,8 +55,11 @@
                     <!-- settings start -->
                     <li class="dropdown">
                         <a data-toggle="dropdown" class="dropdown-toggle" href="/">
+                            My Foodlanes
                             <i class="fa fa-tasks"></i>
-                            <span class="badge bg-theme"><%= current_user.get_active_carts_percent_status.count %></span>
+                            <span class="badge bg-theme">
+                              <%= current_user.get_active_carts_percent_status.count %>
+                            </span>
                         </a>
                         <ul class="dropdown-menu extended tasks-bar">
                             <div class="notify-arrow notify-arrow-green"></div>
@@ -80,10 +86,12 @@
                             </li> -->
                         </ul>
                     </li>
+
                     <!-- settings end -->
                     <!-- inbox dropdown start-->
-                    <li id="header_inbox_bar" class="dropdown">
+                    <li id="header_inbox_bar" class="dropdown" style="margin-left:20px">
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                            Notifications
                             <i class="fa fa-envelope-o"></i>
                             <span class="badge bg-theme">1</span>
                         </a>
@@ -137,11 +145,11 @@
                   <li class="mt">
                       <a class="<%= "active" if current_page?(dashboard_url) %>" href="<%= dashboard_url %>">
                           <i class="fa fa-dashboard"></i>
-                          <span>Dashboard</span>
+                          <span>Restaurants</span>
                       </a>
                   </li>
                   
-                  <li class="sub-menu">
+<!--                   <li class="sub-menu">
                       <a class="<%= "active" if current_page?(restaurants_url) %>" href="<%= restaurants_url %>">
                           <i class="fa fa-th"></i>
                           <span>Restaurants</span>
@@ -154,7 +162,7 @@
                           <span>Foodlanes</span>
                       </a>
                   </li>
-
+ -->
                   <li class="sub-menu">
                       <a class="<%= "active" if current_page?(trending_url) %>" href="<%= trending_url %>">
                           <i class="fa fa-bar-chart-o"></i>
@@ -194,7 +202,10 @@
       *********************************************************************************************************************************************************** -->
       <!--main content start-->
       <section id="main-content">
+      <div class="container">
+
         <%= yield %>
+        </div>
       </section>
 
       <!--main content end-->

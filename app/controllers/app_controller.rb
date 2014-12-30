@@ -8,6 +8,9 @@ class AppController < ApplicationController
     @cun = current_user_name
   end
 
+  def comingsoon
+  end
+
   def handle_order
     # "order"=>{"8"=>"1", "9"=>"1", "7"=>"1"}, "commit"=>"Create Order", "rest_name"=>"chicago_pizza"
     u = current_user

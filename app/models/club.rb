@@ -13,6 +13,13 @@ class Club < ActiveRecord::Base
 		return c
 	end
 
+	def get_percent
+		return ((self.bill_amount*100 ).to_f/(self.restaurant.min_bill).to_f).to_i
+	end
+	def get_diff
+		return [self.restaurant.min_bill - self.bill_amount ,0].max
+	end
+
 	def update_completed
 		if self.bill_amount >= self.restaurant.min_bill
 			self.update(:completed => true)
