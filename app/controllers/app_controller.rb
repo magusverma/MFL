@@ -40,25 +40,29 @@ class AppController < ApplicationController
     else
       redirect_to :back,:notice => "Couldn't Update Cart"
     end     
-    c.save
-    c.club.update_completed if not c.club.nil?
+    c.save   
     @cart = c
     @bill = @cart.get_bill
     session[:cart_id] = c.id
   end
 
   def confirm
+    u = current_user
     cart = Cart.find(session[:cart_id])
     if cart.nil?
       redirect_to :back,:notice => "Couldn't Find Active Cart"
+    elsif not cart.user_id.eql?(u.id)
+      redirect_to :back,:notice => "Invalid Cart Permission"
     else
       cart.user_name = params[:cart][:user_name]
       cart.contact = params[:cart][:contact]  
       cart.address = params[:cart][:address]  
-      cart.expires = Time.now + params[:cart][:time].to_i*60
+      cart.pincode = (Time.now.utc + (params[:cart][:time].to_i*60)).to_i # expires hack
+      cart.expires = Time.now + params[:cart][:time].to_i*60 # doesn't work in  query
     end
     cart.club_status = "donedanadonedara"
     cart.save
+    cart.club.update_completed if not cart.club.nil?
     redirect_to :dashboard,:notice => "Succesfully Created Order"
   end
 

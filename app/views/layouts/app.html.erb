@@ -258,7 +258,39 @@
             //     });
             //     $("#container").removeClass("sidebar-closed");
             // }
-            console.log( "hey Mr.Geek, we would love to have you work with us than hacking around here. Contact magus12141@iiitd.ac.in :)  " );
+            function update(element){
+              if(element.innerHTML == "") return;
+                a = element.innerHTML.split(":");
+                mins = parseInt(a[0]);
+                secs = parseInt(a[1])-1;
+                if(secs<0){
+                  if(mins>0){
+                    mins -= 1;
+                  }
+                  else{
+                    // console.log(element)
+                    // console.log($(element).parent().parent()[0].id);
+                    // pid = $(element).parent().parent().parent()[0].id;
+                    // if(pid!= undefined)
+                    // $("#"+pid).load(location.href + " #"+pid);
+                    return;
+                  }
+                  secs = 59;
+                }
+                element.innerHTML = mins+":"+secs;
+                // console.log(mins);
+                // console.log(secs);
+                return;
+            }
+            var interval = setInterval(function() {
+              // timers = document.getElementsByClassName('timer_div');
+              timers = $('.timer_div');
+              for (var i=0; i<timers.length; i++) {
+                  update(timers[i]);
+              }
+            }, 1000);
+
+            console.log( "hey Geek, we would love to have you work with us than hacking around here. Contact magus12141@iiitd.ac.in :)  " );
         });
     </script>
   </body>

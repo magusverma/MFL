@@ -6,8 +6,10 @@
       Restaurants
     </h1>
         <div class="row mt">
+        <% box_no=0 %>
         <% (1..4).to_a.each do |i| %>
           <% Restaurant.all.each do |restaurant| %>
+            <% box_no +=1 %>
             <!-- <div class="col-md-3 col-sm-3 mb"> -->
             <div class="col-lg-3 col-md-4 col-sm-6 mb">
                 <div class="white-panel pn">
@@ -33,16 +35,21 @@
                         </div>
                     </div>
                     
+
                     <br>
-                    <div style="position:absolute; bottom:0px;" class="col-sm-11 col-xs-11 goleft">
+                    <div style="position:absolute; bottom:0px;" class="col-sm-11 col-xs-11 goleft" id="<%= box_no %>-bar">
                       <% c = Club.get_active_club(restaurant) %>
                       
                       <div class="row">
+                        <div class="col-sm-2">
+                        </div> 
+                        <div class="col-sm-6">
+                         <h4 style="display:inline;">₹ <%= c.get_diff.to_i %></h4> needed 
+                        </div> 
                         <div class="col-sm-4">
+                          <div class="timer_div" style="display:inline;"><%= c.get_time %></div>
                         </div>
-                        <div class="col-sm-8">
-                         <h3 style="display:inline;">₹ <%= c.get_diff %></h3> needed 
-                        </div>                        
+                                               
                       </div>
                       <div class="progress progress-striped" style="width:80%;align-content: center;margin-left: 10%;height: 12px">
                           <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="<%= c.get_percent %>" aria-valuemin="0" aria-valuemax="100" style="width: <%= c.get_percent %>%">

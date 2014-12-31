@@ -1,0 +1,33 @@
+<script>
+function update(element){
+	if(element.innerHTML == "") return;
+    a = element.innerHTML.split(":");
+    mins = parseInt(a[0]);
+    secs = parseInt(a[1])-1;
+    if(secs<0){
+    	if(mins>0){
+    		mins -= 1;
+    	}
+    	else{
+    		element.innerHTML = "";
+    		return;
+    	}
+    	secs = 59;
+    }
+    element.innerHTML = mins+":"+secs;
+    // console.log(mins);
+    // console.log(secs);
+    return;
+}
+var interval = setInterval(function() {
+	timers = document.getElementsByClassName('timer_div');
+	for (var i=0; i<timers.length; i++) {
+	    update(timers[i]);
+	}
+}, 1000);
+
+</script>
+<div class="timer_div">4:40</div>
+<div class="timer_div">3:20</div>
+<div class="timer_div">1:20</div>
+<div class="timer_div">0:20</div>
