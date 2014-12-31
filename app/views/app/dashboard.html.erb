@@ -3,11 +3,13 @@
 <div class="row">
     <div class="col-lg-12 main-chart">
     <h1>
-      All Foodlanes
+      Restaurants
     </h1>
         <div class="row mt">
+        <% (1..4).to_a.each do |i| %>
           <% Restaurant.all.each do |restaurant| %>
-            <div class="col-md-3 col-sm-3 mb">
+            <!-- <div class="col-md-3 col-sm-3 mb"> -->
+            <div class="col-lg-3 col-md-4 col-sm-6 mb">
                 <div class="white-panel pn">
                     <a href="/order/<%= restaurant.url %>" data-transition="pop">
                         <div class="centered">
@@ -54,7 +56,8 @@
             
             <!-- /col-md-4 -->
           <% end %>
-
+          <% end %>
+          
         </div>
         <!-- /row -->
 
