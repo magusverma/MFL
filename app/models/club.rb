@@ -44,8 +44,10 @@ class Club < ActiveRecord::Base
 
 	def update_completed
 		if self.bill_amount >= self.restaurant.min_bill
-			Clubchat.create(:club => self,:message => "wohoo , your foodlane reached the target")
+			Clubchat.create(:club => self,:message => "wohoo! your foodlane reached the target")
 			self.update(:completed => true)
+			self.lock_all
+			self.generate_bill
 		end
 	end
 
