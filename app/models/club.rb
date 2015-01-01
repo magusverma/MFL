@@ -13,6 +13,12 @@ class Club < ActiveRecord::Base
 		return c
 	end
 
+	def send_email
+		self.get_active_carts.each do |cart|
+		  cart.send_mail
+		end
+	end
+
 	def get_active_carts
 		# club status nil for carts whose address step wasn't completed
 		# self.carts.where.not(:club_status => nil).where("? >= ?",:expires,Time.now.utc)
@@ -53,13 +59,14 @@ class Club < ActiveRecord::Base
 
 	def generate_bill
 		if Bill.find_by(:club_id => self.id).nil?
-			b = Bill.new
-			b.club = self
-			b.type = "club-order"
-			b.email = self.generate_email_bill_content
-			b.sms = self.generate_sms_bill_content
-			b.html = sel.generate_html_bill_content
-			return b.save
+			self.send_email
+			# b = Bill.new
+			# b.club = self
+			# b.type = "club-order"
+			# b.email = self.generate_email_bill_content
+			# b.sms = self.generate_sms_bill_content
+			# b.html = sel.generate_html_bill_content
+			# return b.save
 		else
 			# Already a bill had been generated for this club order
 			return false

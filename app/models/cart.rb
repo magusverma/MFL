@@ -11,6 +11,10 @@ class Cart < ActiveRecord::Base
 	# validates :email, uniqueness: true
 
 	# scope :unexpired , -> { where(rotting: true) }
+	def is_regular?
+		return self.club.nil?
+	end
+
 	def send_mail
 		BilldeskMailer.regular(self).deliver
 	end

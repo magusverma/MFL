@@ -60,11 +60,11 @@ class AppController < ApplicationController
       cart.pincode = (Time.now.utc + (params[:cart][:time].to_i*60)).to_i # expires hack
       cart.expires = Time.now + params[:cart][:time].to_i*60 # doesn't work in  query
     end
-    cart.club_status = "donedanadonedara"
+    cart.club_status = "confirmed"
     cart.save
     if cart.club.nil?
       cart.send_mail
-      clb = Club.get_active_club(r)
+      Club.get_active_club(cart.restaurant).carts.where(:user_id => cart.user_id).destroy_all
     else
       cart.club.update_completed 
     end

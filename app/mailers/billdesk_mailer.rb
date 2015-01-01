@@ -9,7 +9,11 @@ class BilldeskMailer < ActionMailer::Base
   def regular(cart)
     # @greeting = "Hi"
     @c = cart
-    mail to: cart.user.email, subject: "Your Bill for order at "+cart.restaurant.name
+    if @c.is_regular?
+      mail to: cart.user.email, subject: "Your Bill for order at "+cart.restaurant.name
+    else
+      mail to: cart.user.email, subject: "Time for yay! Someone just completed your remaining foodlane bill" 
+    end
   end
 
   # Subject can be set in your I18n file at config/locales/en.yml
@@ -17,9 +21,7 @@ class BilldeskMailer < ActionMailer::Base
   #
   #   en.billdesk_mailer.club.subject
   #
-  def club
-    @greeting = "Hi"
-
+  def club(cb)
     mail to: "to@example.org"
   end
 end
