@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
-  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
+  mount RailsAdmin::Engine => '/billadmin', as: 'rails_admin'
+  resources :bills
+
+  # mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   resources :users
   # root to: 'visitors#index'
   root to: 'public#rootpage'

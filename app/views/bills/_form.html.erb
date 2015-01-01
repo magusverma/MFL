@@ -1,0 +1,16 @@
+<%= simple_form_for(@bill) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :club %>
+    <%= f.input :cart %>
+    <%= f.input :type %>
+    <%= f.input :email %>
+    <%= f.input :sms %>
+    <%= f.input :html %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

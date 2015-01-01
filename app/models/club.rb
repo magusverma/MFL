@@ -47,10 +47,27 @@ class Club < ActiveRecord::Base
 			Clubchat.create(:club => self,:message => "wohoo! your foodlane reached the target")
 			self.update(:completed => true)
 			self.lock_all
-			self.generate_bill
+			return self.generate_bill
 		end
 	end
 
+	def generate_bill
+		if Bill.find_by(:club_id => self.id).nil?
+			b = Bill.new
+			b.club = self
+			b.type = "club-order"
+			b.email = self.generate_email_bill_content
+			b.sms = self.generate_sms_bill_content
+			b.html = sel.generate_html_bill_content
+			return b.save
+		else
+			# Already a bill had been generated for this club order
+			return false
+		end
+		=> #<Bill id: nil, club_id: nil, cart_id: nil, type: nil, email: nil, sms: nil, html: nil, created_at: nil, updated_at: nil>
+	end
+
+	def generate_email_bill_content
 	# sum of all verified carts bill
 	def bill_amount
 		g = get_bills
@@ -123,7 +140,11 @@ class Club < ActiveRecord::Base
 	def lock_all
 		# self.carts.where.not(:club_status => nil).each do |c|
 		self.get_active_carts.each_with_index do |c,i|
-			c.lock_it
+			if not c.lock_it
+				puts "ERROR: problem in locking following cart"
+				puts c
+				return false
+			end
 		end
 	end
 end

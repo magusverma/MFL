@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141118134331) do
+ActiveRecord::Schema.define(version: 20150101130850) do
 
   create_table "announcements", force: true do |t|
     t.boolean  "active"
@@ -34,6 +34,17 @@ ActiveRecord::Schema.define(version: 20141118134331) do
     t.text     "line"
     t.string   "context"
     t.string   "page"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "bills", force: true do |t|
+    t.integer  "club_id"
+    t.integer  "cart_id"
+    t.string   "type"
+    t.text     "email"
+    t.text     "sms"
+    t.text     "html"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
