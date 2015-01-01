@@ -64,10 +64,12 @@ class Club < ActiveRecord::Base
 			# Already a bill had been generated for this club order
 			return false
 		end
-		=> #<Bill id: nil, club_id: nil, cart_id: nil, type: nil, email: nil, sms: nil, html: nil, created_at: nil, updated_at: nil>
+		# => #<Bill id: nil, club_id: nil, cart_id: nil, type: nil, email: nil, sms: nil, html: nil, created_at: nil, updated_at: nil>
 	end
 
 	def generate_email_bill_content
+	end
+
 	# sum of all verified carts bill
 	def bill_amount
 		g = get_bills

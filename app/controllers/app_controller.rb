@@ -24,7 +24,7 @@ class AppController < ApplicationController
     end
     
     c = nil
-    if not params["commit"].eql?"Create Order"
+    if not params["order"]["type"].eql?"regular"
       clb = Club.get_active_club(r)
       c = clb.carts.where(:user => u).take
       if c.nil?
@@ -62,7 +62,12 @@ class AppController < ApplicationController
     end
     cart.club_status = "donedanadonedara"
     cart.save
-    cart.club.update_completed if not cart.club.nil?
+    if cart.club.nil?
+      cart.send_mail
+      clb = Club.get_active_club(r)
+    else
+      cart.club.update_completed 
+    end
     redirect_to :dashboard,:notice => "Succesfully Created Order"
   end
 

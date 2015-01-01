@@ -80,7 +80,7 @@
 			 <div class="row">
 				 <div class="col-lg-12 col-md-12 col-sm-12 mb">
 				 <%= form_for "order" , :url => "/order/"+params[:rest_name]+"/handle_order" , html: { method: :post ,id: :cart,"data-minbill" => @current_restaurant["min_bill"]} do |f| %>
-
+				 		<input name="order[type]" style="display:none" value="club" id="ordertype">
 				 		<h2 style="text-align:center;color:white">My Cart</h2>
 				 		<div width="100%" style="background:white;min-height:2px;"></div>
 				 		<div width="100%" style="min-height:5px;"></div>
@@ -143,12 +143,14 @@
 					$("#cocontent").html("Create Order").fadeToggle(300).fadeToggle(300);
 				}
 				$("#cocontent").html("Create Order");
+				$("#ordertype").attr("value","regular");
 				
 			}else{
 				if ($("#cocontent").html() == "Create Order"){
 					$("#cocontent").html("Join Foodlane").fadeToggle(300).fadeToggle(300);
 				}
 				$("#cocontent").html("Join Foodlane");
+				$("#ordertype").attr("value","club");
 			}
 		}
     }

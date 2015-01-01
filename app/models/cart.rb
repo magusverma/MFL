@@ -11,7 +11,10 @@ class Cart < ActiveRecord::Base
 	# validates :email, uniqueness: true
 
 	# scope :unexpired , -> { where(rotting: true) }
-	
+	def send_mail
+		BilldeskMailer.regular(self).deliver
+	end
+
 	def expired?
 		if self.expires.nil?
 			return false
@@ -61,7 +64,7 @@ class Cart < ActiveRecord::Base
 	end
 
 	def calculate_bill
-		tax_percent = 0.15
+		tax_percent = 0.0
 		unless self.locked?
 			self.copy_data
 			bill = 0

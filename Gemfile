@@ -19,6 +19,9 @@ gem 'pundit'
 gem 'simple_form'
 gem 'rails_admin', :git => 'git://github.com/sferik/rails_admin.git'
 gem 'rails-timeago', '~> 2.0'
+gem 'roadie-rails'
+gem 'roadie'
+
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller', :platforms=>[:mri_21]
