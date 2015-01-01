@@ -2,7 +2,6 @@ source 'https://rubygems.org'
 ruby '2.1.4'
 gem 'rails', '4.1.7'
 group :development, :test do
-    gem 'rspec-rails'
     gem 'sqlite3'
 end
 
