@@ -49,8 +49,14 @@ class Club < ActiveRecord::Base
 	end
 
 	def update_completed
+		self.get_active_carts.each do |cart|
+			Clubchat.create(user: cart.user, cart: cart,club: self, message: "your foodlane just got updated now Rs."+self.get_diff.to_i.to_s+" to go.")
+		end
 		if self.bill_amount >= self.restaurant.min_bill
-			Clubchat.create(:club => self,:message => "wohoo! your foodlane reached the target")
+			self.get_active_carts.each do |cart|
+				Clubchat.create(user: cart.user, cart: cart,club: self, message: "wohoo! your foodlane reached the target, your order has been sent for delivery")
+			end
+			# Clubchat.create(:club => self,:message => "wohoo! your foodlane reached the target")
 			self.update(:completed => true)
 			self.lock_all
 			return self.generate_bill

@@ -94,25 +94,28 @@
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                             Notifications
                             <i class="fa fa-envelope-o"></i>
-                            <span class="badge bg-theme">1</span>
+                            <span class="badge bg-theme"><%= current_user.clubchats.count %></span>
                         </a>
                         <ul class="dropdown-menu extended inbox">
                             <div class="notify-arrow notify-arrow-green"></div>
+                            <li>.</li>
+                            <!-- <li>
+                                <p class="green">You have <%= current_user.clubchats.count %> new messages</p>
+                            </li> -->
+                            <% current_user.clubchats.last(5).reverse.each do |cc| %> 
                             <li>
-                                <p class="green">You have 1 new messages</p>
-                            </li>
-                            <li>
-                                <a href="/track/1">
-                                    <span class="photo"><img alt="avatar" src="/assets/img/chicago.jpeg"></span>
-                                    <span class="subject">
-                                    <span class="from">Chicago Pizza</span>
-                                    <span class="time">Just now</span>
+                                <!-- <a href="/track/1"> -->
+                                    <span class="photo"><img alt="avatar" src="<%= cc.cart.restaurant.photo_url %>" style="max-width:40px;max-height:40px;"></span>
+                                    <!-- <span class="subject">
+                                    <span class="from"><%= cc.cart.restaurant.name %></span>
+                                    <span class="time">Just now</span> -->
                                     </span>
                                     <span class="message">
-                                        Your Order is Out for Delivery
+                                        <%= cc.message %>
                                     </span>
-                                </a>
+                                <!-- </a> -->
                             </li>
+                            <% end %>
                             <!-- <li>
                                 <a href="index.html#">See all messages</a>
                             </li> -->

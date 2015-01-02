@@ -2,6 +2,8 @@ class User < ActiveRecord::Base
   enum role: [:user, :vip, :admin]
   after_initialize :set_default_role, :if => :new_record?
   has_many :carts
+  has_many :clubchats 
+  # , through: :carts
 
 
   def get_active_carts

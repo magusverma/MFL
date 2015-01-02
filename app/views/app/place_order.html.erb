@@ -94,7 +94,7 @@
 				 		<div width="100%" style="min-height:5px;"></div>
 				 		<% if not @c.nil? %>
 				 		<% @c.cartitems.each do |ci| %>
-							 <div class="present" id="ci-<%= ci.id.to_s%>" style="color:white;font-size:14px;">
+							 <div class="present" id="ci-<%= ci.item.id.to_s%>" style="color:white;font-size:14px;">
 								 <%= ci.item.name + "(₹"+ci.item.price.to_i.to_s+")" %> &nbsp   
 								 <div style='float:right'>
 									 <input max="9" min="1" name="order[<%= ci.item.id.to_s %>]" style="background-color: #525a65;width:30px;height:45%;vertical-align: middle;" type="number" value='<%= ci.quantity.to_i.to_s %>' class="quantity" onchange="computeBill()" data-price='<%= ci.price.to_i.to_s%>'>
@@ -121,10 +121,11 @@
 	$(document).ready(function(){
 		computeBill();
 		$('.menu-item').on('click',function(){
-			var ci = "#ci-"+$(this).attr("id")
+			var ci = "#ci-"+$(this).attr("id");
+			console.log(ci);
 			
 			if($(ci).is(".present")){
-				var cart_item = $(ci).find("input")
+				var cart_item = $(ci).find("input");
 				cart_item.hide(200).val(+cart_item.val() + 1).show(200);
 			}
 			else{

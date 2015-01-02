@@ -16,6 +16,7 @@ class Cart < ActiveRecord::Base
 	end
 
 	def send_mail
+		Clubchat.create(user: self.user, cart: self, message: "your bill has been sent to mail id "+self.user.email)
 		BilldeskMailer.regular(self).deliver
 	end
 
