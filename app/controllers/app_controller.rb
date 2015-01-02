@@ -63,8 +63,11 @@ class AppController < ApplicationController
     cart.club_status = "confirmed"
     cart.save
     if cart.club.nil?
+      Club.get_active_club(cart.restaurant).carts.where(:user_id => cart.user_id).each do |c|
+        c.update(:club => nil)
+        Clubchat.create(user: c.user, cart: c, message: "your foodlane order changed to regular order")
+      end
       cart.send_mail
-      Club.get_active_club(cart.restaurant).carts.where(:user_id => cart.user_id).destroy_all
       redirect_to :dashboard,:notice => "Succesfully Created Order"
     else
       cart.club.update_completed 
