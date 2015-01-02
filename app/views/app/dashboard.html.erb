@@ -1,6 +1,11 @@
-
-          <section class="wrapper">
+<section class="wrapper">
 <div class="row">
+        <% flash.each do |type, message| %>
+          <div class="alert alert-info fade in" >
+            <button class="close" data-dismiss="alert">×</button>
+            <%= message %>
+          </div>
+        <% end %>
     <div class="col-lg-12 main-chart">
     <h1>
       Restaurants

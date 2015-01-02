@@ -65,10 +65,12 @@ class AppController < ApplicationController
     if cart.club.nil?
       cart.send_mail
       Club.get_active_club(cart.restaurant).carts.where(:user_id => cart.user_id).destroy_all
+      redirect_to :dashboard,:notice => "Succesfully Created Order"
     else
       cart.club.update_completed 
+      redirect_to :dashboard,:notice => "Your order has been added to restaurant's current foodlane"
     end
-    redirect_to :dashboard,:notice => "Succesfully Created Order"
+
   end
 
   def dashboard
@@ -98,6 +100,19 @@ class AppController < ApplicationController
 
   def place_order
     @current_restaurant = Restaurant.get_restaurant(params["rest_name"]).get_rest
+    u = current_user
+    if u.nil? 
+      redirect_to :back , :notice => "Invalid User Session"
+    end
+
+    r = Restaurant.get_restaurant(params["rest_name"])
+    if r.nil? 
+      redirect_to :back , :Club.get_active_clubnotice => "Invalid Restaurant"
+    end
+    
+    clb = Club.get_active_club(r)
+    @c = clb.carts.where(:user => u).take
+
   end
 
   def confirm_order
