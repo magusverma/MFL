@@ -43,9 +43,6 @@
       *********************************************************************************************************************************************************** -->
       <!--header start-->
       <header class="header black-bg">
-              <div class="sidebar-toggle-box">
-                  <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
-              </div>
             <!--logo start-->
             <a href="/" class="logo">
               <b><%# Applingo.get('logo')%></b>
@@ -138,67 +135,7 @@
       MAIN SIDEBAR MENU
       *********************************************************************************************************************************************************** -->
       <!--sidebar start-->
-      <aside>
-          <div id="sidebar" class="nav-collapse ">
-              <!-- sidebar menu start-->
-              <ul class="sidebar-menu" id="nav-accordion">
-              
-              	  <p class="centered"><a href="/profile"><img src="<%= @cui %>" class="img-circle" width="60"></a></p>
-              	  <h5 class="centered"><%= @cun %></h5>
-              	  	
-                  <li class="mt">
-                      <a class="<%= "active" if current_page?(dashboard_url) %>" href="<%= dashboard_url %>">
-                          <i class="fa fa-dashboard"></i>
-                          <span>Restaurants</span>
-                      </a>
-                  </li>
-                  
-<!--                   <li class="sub-menu">
-                      <a class="<%= "active" if current_page?(restaurants_url) %>" href="<%= restaurants_url %>">
-                          <i class="fa fa-th"></i>
-                          <span>Restaurants</span>
-                      </a>
-                  </li>
-
-                  <li class="sub-menu">
-                      <a class="<%= "active" if current_page?(foodlanes_url) %>" href="<%= foodlanes_url %>">
-                          <i class="fa fa-tasks"></i>
-                          <span>Foodlanes</span>
-                      </a>
-                  </li>
- -->
-                  <li class="sub-menu">
-                      <a class="<%= "active" if current_page?(trending_url) %>" href="<%= trending_url %>">
-                          <i class="fa fa-bar-chart-o"></i>
-                          <span>Trending</span>
-                      </a>
-                  </li>
-
-                  <li class="sub-menu">
-                      <a class="<%= "active" if current_page?(big_orders_url) %>" href="<%= big_orders_url %>">
-                          <i class="fa fa-desktop"></i>
-                          <span>Big Orders</span>
-                      </a>
-                  </li>
-
-                  <li class="sub-menu">
-                      <a class="<%= "active" if current_page?(preferences_url) %>" href="<%= preferences_url %>">
-                          <i class="fa fa-cogs"></i>
-                          <span>Preferences</span>
-                      </a>
-                  </li>
-
-                  <li class="sub-menu">
-                      <a class="<%= "active" if current_page?(foodlane_help_url) %>" href="<%= foodlane_help_url %>">
-                          <i class="fa fa-book"></i>
-                          <span>Foodlane Help</span>
-                      </a>
-                  </li>
-
-              </ul>
-              <!-- sidebar menu end-->
-          </div>
-      </aside>
+      <aside></aside>
       <!--sidebar end-->
       
       <!-- **********************************************************************************************************************************************************
