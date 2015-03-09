@@ -14,6 +14,7 @@ This application requires:
 - Ruby 2.1.4
 - Rails 4.1.7
 
+Setting up [Git,Ruby,Rains in Ubuntu 12.04](https://gist.github.com/magusverma/e6b863ed95f51a64b3fe)
 Learn more about [Installing Rails](http://railsapps.github.io/installing-rails.html).
 
 Getting Started
