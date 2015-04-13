@@ -10,9 +10,9 @@ class BilldeskMailer < ActionMailer::Base
     # @greeting = "Hi"
     @c = cart
     if @c.is_regular?
-      mail to: cart.user.email, subject: "Your Bill for order at "+cart.restaurant.name
+      mail to: cart.user.email, subject: "Your Bill for order at "+cart.restaurant.name, from: "mail@foodlane.com"
     else
-      mail to: cart.user.email, subject: "Time for yay! Someone just completed your remaining foodlane bill" 
+      mail to: cart.user.email, subject: "Time for yay! Someone just completed your remaining foodlane bill", from: "mail@foodlane.com"
     end
   end
 

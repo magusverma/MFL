@@ -27,17 +27,27 @@ Rails.application.configure do
   # number of complex assets.
   config.assets.debug = true
 
+  # config.action_mailer.smtp_settings = {
+  #   address: "smtp.gmail.com",
+  #   port: 587,
+  #   # domain: Rails.application.secrets.domain_name,
+  #   domain: "gmail.com",
+  #   authentication: "plain",
+  #   enable_starttls_auto: true,
+  #   # user_name: Rails.application.secrets.email_provider_username,
+  #   # password: Rails.application.secrets.email_provider_password
+  #   user_name: 'foodlanedesk',
+  #   password: 'FOOBAR123'
+  # }
+
   config.action_mailer.smtp_settings = {
-    address: "smtp.gmail.com",
-    port: 587,
-    # domain: Rails.application.secrets.domain_name,
-    domain: "gmail.com",
-    authentication: "plain",
-    enable_starttls_auto: true,
-    # user_name: Rails.application.secrets.email_provider_username,
-    # password: Rails.application.secrets.email_provider_password
-    user_name: 'foodlanedesk',
-    password: 'FOOBAR123'
+    :address   => "smtp.mandrillapp.com",
+    :port      => 25, # ports 587 and 2525 are also supported with STARTTLS
+    :enable_starttls_auto => true, # detects and uses STARTTLS
+    :user_name => "pulkit12082@iiitd.ac.in",
+    :password  => "E6-gEACHxG9JoqJ_X0uNJg", # SMTP password is any valid API key
+    :authentication => 'login', # Mandrill supports 'plain' or 'login'
+    :domain => 'gmail.com', # your domain to identify your server when connecting
   }
   # ActionMailer Config
   config.action_mailer.default_url_options = { :host => 'localhost:3000' }
